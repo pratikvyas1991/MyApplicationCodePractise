@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">10</dimen>
+    <dimen name="header_margin">12</dimen>
+    <dimen name="activity_vertical_margin">10</dimen>
+    <dimen name="activity_vertical_margin_small">10</dimen>
+    <dimen name="buttonTextSize">15</dimen>
 </resources>

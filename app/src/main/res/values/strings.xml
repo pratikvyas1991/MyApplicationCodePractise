@@ -9,4 +9,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="settings_title">My Setting</string>
+    <string name="name_label">Name</string>
+    <string name="name_hint">Enter Name</string>
+    <string name="dob_label">Date of Birth</string>
+    <string name="email_label">Email Address</string>
+    <string name="email_hint">Enter Email Address</string>
+    <string name="save">Save</string>
+    <string name="revert">Revert</string>
 </resources>
