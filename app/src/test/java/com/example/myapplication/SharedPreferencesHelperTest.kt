@@ -9,16 +9,19 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Matchers.anyLong
-import org.mockito.Matchers.anyString
+import org.mockito.Matchers.*
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.eq
 import org.mockito.runners.MockitoJUnitRunner
 import java.util.*
 
 
 /**
  * Unit tests for the {@link SharedPreferencesHelper} that mocks {@link SharedPreferences}.
+ * RefLink
+ * 1) https://medium.com/mindorks/learn-unit-testing-in-android-by-building-a-sample-application-23ec2f6340e8#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjgxOWQxZTYxNDI5ZGQzZDNjYWVmMTI5YzBhYzJiYWU4YzZkNDZmYmMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MzAyNTMwMzQsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMjIzNjkxODI4MzA2NTEzNDY4NiIsImVtYWlsIjoicHJhdGlrdnlhczEzMDMxOTkxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiUHJhdGlrIFZ5YXMiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hhcERjNUNnZHk2SF8tYkMzUm5teVlTVVRWSjF4YUkwa1ZsUzR6X3c9czk2LWMiLCJnaXZlbl9uYW1lIjoiUHJhdGlrIiwiZmFtaWx5X25hbWUiOiJWeWFzIiwiaWF0IjoxNjMwMjUzMzM0LCJleHAiOjE2MzAyNTY5MzQsImp0aSI6IjEwZWJiMGJhNzYzZTQxZmRhNTNlNzkwNzYxOGIwNDJhZTNhYjE5MWQifQ.n9ELnFNjLmeFJCJ9umYeeVRnsyQsvr68zSteV1xlYBo-9ElSvjEjeWRv6pi7uwB_dyMchwp6zVmEA4gQuLyHQVdH0KbqfPdj0I62WOAtyUEIGxAyQ1FGrezvFgjBV_uLrfQZYOYSWLergp1oxP39fSiVsDXq2RrzYmJ6yAnXvJd0D90KBJR8T0DDte0k2ta599iX0Eu9jlCyETdUidxgeSPG6qL5ZCkqNtIEhAqD0Jxkb9cPcTrSlZ6x9H9Er6gn26mYcejHOqkA4TaL_xkkP_ulVq_roFVyDKmRlmckymDRA4i2J9PKq1cfMtNxbrFMdk29ehdpBBHltIxozA0-Mw
+ * 2) https://kotlintesting.com/using-mockito-in-kotlin-projects/
  */
 
 @RunWith(MockitoJUnitRunner::class)
@@ -105,21 +108,17 @@ class SharedPreferencesHelperTest {
         // Mocking reading the SharedPreferences as if mMockSharedPreferences was previously written
         // correctly.
         `when`(
-            mMockSharedPreferences!!.getString(
-                SharedPreferencesHelper.KEY_NAME,
-                anyString()
-            )
-        )
-            .thenReturn(mSharedPreferenceEntry!!.name)
-//        `when`(
-//            mMockSharedPreferences!!.getString(
-//                SharedPreferencesHelper.KEY_EMAIL,
-//                anyString()
-//            )
-//        )
-//            .thenReturn(mSharedPreferenceEntry!!.email)
-        `when`(mMockSharedPreferences!!.getLong(SharedPreferencesHelper.KEY_DOB, anyLong()))
-            .thenReturn(mSharedPreferenceEntry!!.dateOfBirth.timeInMillis)
+            mMockSharedPreferences!!.getString(eq(SharedPreferencesHelper.KEY_NAME), anyString())
+        ).thenReturn(mSharedPreferenceEntry!!.name)
+
+        `when`(
+            mMockSharedPreferences!!.getString(eq(SharedPreferencesHelper.KEY_EMAIL), anyString())
+        ).thenReturn(mSharedPreferenceEntry!!.email)
+
+        `when`(
+            mMockSharedPreferences!!.getLong(eq(SharedPreferencesHelper.KEY_DOB), anyLong())
+        ).thenReturn(mSharedPreferenceEntry!!.dateOfBirth.timeInMillis)
+
         // Mocking a successful commit.
         `when`(mMockEditor!!.commit()).thenReturn(true)
         // Return the MockEditor when requesting it.
